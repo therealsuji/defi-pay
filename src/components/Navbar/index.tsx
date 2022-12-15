@@ -65,14 +65,14 @@ const Navbar = () => {
           onClick={() => setDrawerOpen((isOpen) => !isOpen)}
         >
           {drawerOpen ? (
-            <XMarkIcon className='h-6 w-6 text-blue-500' />
+            <XMarkIcon className='h-6 w-6 text-primary-color' />
           ) : (
-            <Bars3Icon className='h-6 w-6 text-blue-500' />
+            <Bars3Icon className='h-6 w-6 text-primary-color' />
           )}
         </button>
       </div>
       {/* Mobile Menu */}
-      {drawerOpen && (
+      {drawerOpen ? (
         <div className={'md:hidden'}>
           {navbarItems.map((item, index) => (
             <NavLink
@@ -88,7 +88,7 @@ const Navbar = () => {
             </NavLink>
           ))}
         </div>
-      )}
+      ) : null}
     </nav>
   );
 };
