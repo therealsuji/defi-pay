@@ -5,7 +5,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 const Navbar = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(true);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   const navbarItems = [
     {
@@ -65,28 +65,30 @@ const Navbar = () => {
           onClick={() => setDrawerOpen((isOpen) => !isOpen)}
         >
           {drawerOpen ? (
-            <Bars3Icon className='h-6 w-6 text-blue-500' />
-          ) : (
             <XMarkIcon className='h-6 w-6 text-blue-500' />
+          ) : (
+            <Bars3Icon className='h-6 w-6 text-blue-500' />
           )}
         </button>
       </div>
       {/* Mobile Menu */}
-      <div className={drawerOpen ? 'hidden' : ''}>
-        {navbarItems.map((item, index) => (
-          <NavLink
-            className={`flex h-10 px-4 ${
-              activeIndex === index
-                ? 'bg-primary-color text-white'
-                : 'hover:bg-sky-200'
-            }`}
-            to={item.to}
-            onClick={() => onHandleNavigate(index)}
-          >
-            <button className='text-base font-semibold'>{item.name}</button>
-          </NavLink>
-        ))}
-      </div>
+      {drawerOpen && (
+        <div className={'md:hidden'}>
+          {navbarItems.map((item, index) => (
+            <NavLink
+              className={`flex h-10 px-4 ${
+                activeIndex === index
+                  ? 'bg-primary-color text-white'
+                  : 'hover:bg-sky-200'
+              }`}
+              to={item.to}
+              onClick={() => onHandleNavigate(index)}
+            >
+              <button className='text-base font-semibold'>{item.name}</button>
+            </NavLink>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };
